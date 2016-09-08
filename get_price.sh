@@ -26,16 +26,17 @@ while [ "$b" != "$e" ]; do
 
     try=true
 
-    while [ $try="$true" ];do
-	    echo $try
+    while [ "$try" = true ];do
         f="${outyear}-${outmonth}-${outday}_price.csv" 
 
         wget -O $f $url
     
         if [ -s $f ]; then
-            let try=$false
+            let try=false
+        else
+            echo "ERROR ENCOUNTERED. RETRYING $b IN A FEW SECONDS..."
+            sleep 2
         fi
-        echo $try
     done
 
 	b=$(date +%Y-%m-%d -d "$b +1 day")
